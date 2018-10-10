@@ -108,7 +108,7 @@ export default function withJob(config) {
         }
       }
 
-      resolveWork = props => {
+      resolveWork = (props) => {
         let workDefinition
 
         this.setState({ completed: false, data: null, error: null })
@@ -124,7 +124,7 @@ export default function withJob(config) {
         if (isPromise(workDefinition)) {
           // Asynchronous result.
           return workDefinition
-            .then(data => {
+            .then((data) => {
               if (this.unmounted) {
                 return undefined
               }
@@ -135,7 +135,7 @@ export default function withJob(config) {
               // Ensures asyncBootstrap continues
               return true
             })
-            .catch(error => {
+            .catch((error) => {
               if (this.unmounted) {
                 return undefined
               }
@@ -152,16 +152,8 @@ export default function withJob(config) {
                 // eslint-disable-next-line no-console
                 console.warn('Failed to resolve job')
                 // eslint-disable-next-line no-console
-                console.warn(error.message)
-                // eslint-disable-next-line no-console
-                console.warn(error.stack)
                 if (this.context.jobs) {
-                  this.context.jobs.register(id, {
-                    error: {
-                      message: error.message,
-                      stack: error.stack,
-                    },
-                  })
+                  this.context.jobs.register(id, { error })
                 }
               }
               // Ensures asyncBootstrap stops

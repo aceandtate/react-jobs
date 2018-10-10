@@ -365,16 +365,8 @@ function withJob(config) {
               // eslint-disable-next-line no-console
               console.warn('Failed to resolve job');
               // eslint-disable-next-line no-console
-              console.warn(error.message);
-              // eslint-disable-next-line no-console
-              console.warn(error.stack);
               if (_this2.context.jobs) {
-                _this2.context.jobs.register(id, {
-                  error: {
-                    message: error.message,
-                    stack: error.stack
-                  }
-                });
+                _this2.context.jobs.register(id, { error: error });
               }
             }
             // Ensures asyncBootstrap stops
